@@ -1,0 +1,17 @@
+{
+    "result": "success",
+    "data": {
+        "config_id": "kaposvar",
+        "created": "2025-01-07T04:39:30+01:00",
+        "trips_begin": "20250107",
+        "trips_end": "20250307",
+        "trips_count": 1288,
+        "timetable_period": "60",
+        "checksum": "DE68EA61DA3FA69578502EACDF603AA8CF6DAEF060CCAE3BEB8EDF8A969DCAC4",
+        "db_version": 5,
+        "included_configs": [
+            "mav_kaposvar",
+            "volanbusz_kaposvar"
+        ]
+    }
+}
