@@ -99,11 +99,11 @@ if (!isset($_SESSION['user_id'])) {
         </button>
         <button class="transit-mode-btn flex-1 p-3 bg-green-50 rounded-lg hover:bg-green-100 transition" data-mode="train">
             <i class="fas fa-train text-3xl text-green-600"></i>
-            <span class="block mt-2 font-semibold">Regionális Vonat</span>
+            <span class="block mt-2 font-semibold">Vonat</span>
         </button>
         <button class="transit-mode-btn flex-1 p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition" data-mode="complex">
             <i class="fas fa-network-wired text-3xl text-purple-600"></i>
-            <span class="block mt-2 font-semibold">Komplex Járat</span>
+            <span class="block mt-2 font-semibold">Helyi Járat</span>
         </button>
     </div>
 
@@ -621,8 +621,6 @@ function initMap() {
         });
     }
 });
-
-    
 // Initialize Google Map
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
@@ -643,14 +641,15 @@ function processAndDisplayGTFS(gtfsData) {
     }
 
     // Verify data structure
-    if (!gtfsData || !gtfsData['shapes.txt']) {
+    if (!gtfsData || !gtfsData['shapes.txt'] || !gtfsData['stops.txt']) {
         console.error('Invalid GTFS data structure', gtfsData);
         return;
     }
 
     const shapes = gtfsData['shapes.txt'];
+    const stops = gtfsData['stops.txt'];
     const bounds = new google.maps.LatLngBounds();
-    
+
     // Group shapes by shape_id
     const shapeGroups = {};
     
@@ -709,6 +708,32 @@ function processAndDisplayGTFS(gtfsData) {
         });
     });
 
+    // Process stops and add markers
+    stops.forEach(stop => {
+        const lat = parseFloat(stop.stop_lat);
+        const lng = parseFloat(stop.stop_lon);
+
+        // Verify valid coordinates
+        if (isNaN(lat) || isNaN(lng)) return;
+
+        const marker = new google.maps.Marker({
+            position: { lat, lng },
+            map: map,
+            title: `Stop ID: ${stop.stop_id}`
+        });
+
+        // Create info window for stops
+        const infoWindow = new google.maps.InfoWindow({
+            content: `<div>Stop ID: ${stop.stop_id}<br>Stop Name: ${stop.stop_name}</div>`
+        });
+
+        marker.addListener('click', () => {
+            infoWindow.open(map, marker);
+        });
+
+        bounds.extend({ lat, lng });
+    });
+
     // Fit map to show all points
     if (!bounds.isEmpty()) {
         map.fitBounds(bounds);
@@ -732,9 +757,6 @@ function initializeGTFSData() {
             console.error('Error loading GTFS data:', error);
         });
 }
-
-// Add this to your HTML
 </script>
-
-</bo>
+</body>
 </html>
