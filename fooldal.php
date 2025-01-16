@@ -1,15 +1,13 @@
 <?php
-session_start();
+// Adatbázis kapcsolat
 require_once 'config.php';
 
-// Debug információ
-error_log("Session tartalma: " . print_r($_SESSION, true));
-
-// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
-if (!isset($_SESSION['user_id'])) {
-    error_log("Nincs bejelentkezve, átirányítás a login.php-ra");
-    header("Location: login.php");
-    exit();
+$sql = "SELECT * FROM hirek";
+try {
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 
 ?>
@@ -139,7 +137,7 @@ if (!isset($_SESSION['user_id'])) {
         width: 290px;
         height: 375px;
         border-radius: 20px;
-        background: #f5f5f5;
+        background: #fcfcfc;
         position: relative;
         padding: 2rem;
         border: 2px solid #c3c6ce;
@@ -193,6 +191,14 @@ if (!isset($_SESSION['user_id'])) {
     .card:hover .card-button {
         transform: translate(-50%, 50%);
         opacity: 1;
+    }
+
+    .news-date{
+        background: #b30000;
+        width: 90px;
+        border-radius: 3px;
+        padding:3px;
+        color: #fbfbfb;
     }
 /*End */
 
@@ -402,7 +408,25 @@ if (!isset($_SESSION['user_id'])) {
 <!-- -----------------------------------------------------------------------------------------------------HTML - NEWS-------------------------------------------------------------------------------------------------- -->
     <h1 style="color: #b30000; margin-left: 20%; margin-bottom: 3%; margin-top: 5%;">Hírek</h1>
 
-    <div id="card-container" class="card-container"></div>
+    <div class="card-container">
+        <?php
+        if ($stmt->rowCount() > 0) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo '<div class="card">';
+                echo '<div class="card-details">';             
+                echo '<h2 class="text-title">' . htmlspecialchars($row["title"]) . '</h2>';
+                echo '<p class="card-details">' . htmlspecialchars(substr($row["details"], 0, 100)) . '...</p>';
+                echo '<p class="news-date">' . htmlspecialchars($row["date"]) . '</p>';
+                echo '</div>';
+                echo '<a href="news.php?id=' . $row["id"] . '" class="card-button" style="text-align:center;">Részletek</a>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>Nincsenek hírek.</p>';
+        }
+        ?>
+    </div>
+
 <!-- -----------------------------------------------------------------------------------------------------NEWS END----------------------------------------------------------------------------------------------------- -->
 
 <!-- -----------------------------------------------------------------------------------------------------HTML - MORE NEWS BUTTON-------------------------------------------------------------------------------------- -->
@@ -469,7 +493,7 @@ if (!isset($_SESSION['user_id'])) {
             });
         });
 /*--------------------------------------------------------------------------------------------------------DROPDOWNMENU END-----------------------------------------------------------------------------------------------*/
-
+/*
         const newsData = [
             {
                 "img": "bus.png",
@@ -581,7 +605,7 @@ if (!isset($_SESSION['user_id'])) {
         // Initial setup
         displayNews();
         setupButton();
-        
+*/
     </script>
   </body>
 </html>

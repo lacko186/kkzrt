@@ -146,7 +146,7 @@ try {
             padding-left: 20px;
             padding-right: 15px;
             color: var(--text-light);
-            margin-left: 16%;
+            margin-left: 20%;
         }
 
         .route-name{
@@ -154,14 +154,14 @@ try {
             color: #636363;
             font-size: 1.5rem;
             font-weight: bold;
-            margin-left: 16%;
+            margin-left: 20%;
         }
 
         .switchBtn{
             display: inline;
             float: right;
             background: #fbfbfb;
-            margin-right: 16%;
+            margin-right: 20%;
         }
 
         .switchBtn:hover{
@@ -536,13 +536,13 @@ try {
             },
             {
                 "number": "43",
-                "name": "Helyi autóbusz-állomás - Kórház- Laktanya - Raktár utca - Helyi autóbusz-állomás",
+                "name": "Helyi aut.-áll. - Kórház- Laktanya - Raktár utca - Helyi aut.-áll.s",
                 "start": ["08:50","11:20"],
                 "goesBack": false,
             },
             {
                 "number": "44",
-                "name": "Helyi autóbusz-állomás - Raktár utca - Laktanya -Arany János tér - Helyi autóbusz-állomás",
+                "name": "Helyi aut.-áll. - Raktár utca - Laktanya -Arany János tér - Helyi aut.-áll.",
                 "start": ["08:30","11:35","13:20"],
                 "goesBack": false,
             },

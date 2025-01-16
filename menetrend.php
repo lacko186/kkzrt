@@ -502,7 +502,7 @@ try {
 
         .footer-section h2 {
             margin-bottom: 1rem;
-            color: var(--accent-color);
+            color: var(--text-color);
         }
 
         .footer-links {

@@ -154,7 +154,7 @@ try {
             float: right;
             font-size: 1.5rem;
             font-weight: bold;
-            margin-right: 16%;
+            margin-right: 18%;
             margin-top: 1%;
         }
 

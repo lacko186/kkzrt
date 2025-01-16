@@ -670,12 +670,12 @@ try {
                     },
                     {
                         "number": "43",
-                        "name": "Helyi autóbusz-állomás - Kórház- Laktanya - Raktár utca - Helyi autóbusz-állomás",
+                        "name": "Helyi aut.-áll. - Kórház- Laktanya - Raktár utca - Helyi aut.-áll.",
                         "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
                     },
                     {
                         "number": "44",
-                        "name": "Helyi autóbusz-állomás - Raktár utca - Laktanya -Arany János tér - Helyi autóbusz-állomás",
+                        "name": "Helyi aut.-áll. - Raktár utca - Laktanya -Arany J. tér - Helyi aut.-áll.",
                         "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
                     },
                     {

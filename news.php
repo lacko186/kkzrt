@@ -1,17 +1,25 @@
 <?php
-session_start();
+// Adatbázis kapcsolat
 require_once 'config.php';
 
-// Debug információ
-error_log("Session tartalma: " . print_r($_SESSION, true));
-
-// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
-if (!isset($_SESSION['user_id'])) {
-    error_log("Nincs bejelentkezve, átirányítás a login.php-ra");
-    header("Location: login.php");
+if (!isset($_GET['id'])) {
+    echo 'Hír nem található!';
     exit();
 }
 
+$id = (int)$_GET['id'];
+
+$sql = "SELECT title, details, date FROM hirek WHERE id = :id";
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt->execute();
+
+$news = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$news) {
+    echo 'Hír nem található!';
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -91,7 +99,7 @@ if (!isset($_SESSION['user_id'])) {
     }
 
 /*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
-footer {
+    footer {
         text-align: center;
         padding: 10px;
         background-color: var(--primary-color);
@@ -213,7 +221,12 @@ footer {
 <!-- -----------------------------------------------------------------------------------------------------HEADER END--------------------------------------------------------------------------------------------------- -->
 
 <!-- -----------------------------------------------------------------------------------------------------HTML - NEWS CONTAINER---------------------------------------------------------------------------------------- -->
-    <div id="news-container"></div>
+    <div class="container">
+        <h1 style="padding-bottom:20px;"><?php echo htmlspecialchars($news['title']); ?></h1>
+        <p style="background: #b30000;width: 90px;border-radius: 3px;padding:3px;color: #fbfbfb;margin-bottom:20px;"><?php echo htmlspecialchars($news['date']); ?></p>
+        <p style="margin-bottom:20px;"><?php echo nl2br(htmlspecialchars($news['details'])); ?></p>
+        
+    </div>
 <!-- -----------------------------------------------------------------------------------------------------NEWS CONTAINER END------------------------------------------------------------------------------------------- -->
 
 <!-- -----------------------------------------------------------------------------------------------------HTML - FOOTER------------------------------------------------------------------------------------------------ -->
@@ -250,7 +263,7 @@ footer {
         window.location.href = 'fooldal.php'; 
     });
 /*---------------------------------------------------------------------------------------------------------BACK BUTTON END-----------------------------------------------------------------------------------------------*/
-
+/*
         const news = [
             {
                 "img": "/bus.png",
@@ -297,7 +310,7 @@ footer {
 
         // Append the container to the body or another element in your HTML
         document.div.appendChild(newContainer);
-
+*/
     </script>
   </body>
 </html>
