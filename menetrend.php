@@ -33,7 +33,7 @@ try {
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(to right, black, darkred, grey);
+            background: #e8e8e8;
             color: #333;
             margin: 0;
             padding: 0;
@@ -399,7 +399,7 @@ try {
         }
 
         .route-card {
-            background: #edebeb;
+            background: #fcfcfc;
             border-radius: 20px;
             box-shadow: var(--shadow);
             padding: 1.5rem;
@@ -1371,39 +1371,6 @@ function updateRouteDetails(routes, filter = "all", selectedDate = new Date()) {
             });
         }
 
-
-
-       //  dark mode button//
-
-       
-        
-        function addThemeToggle() {
-            const themeBtn = document.createElement('button');
-            themeBtn.className = 'filter-button';
-            themeBtn.innerHTML = '<i class="fas fa-moon"></i>';
-            themeBtn.style.position = 'fixed';
-            themeBtn.style.bottom = '20px';
-            themeBtn.style.right = '20px';
-            themeBtn.style.zIndex = '1000';
-            
-            let isDark = false;
-            themeBtn.addEventListener('click', () => {
-                isDark = !isDark;
-                document.body.style.background = isDark ? '#1a1a1a' : 'linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%)';
-                document.body.style.color = isDark ? '#fff' : '#333';
-                themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-                
-                const cards = document.querySelectorAll('.route-card');
-                cards.forEach(card => {
-                    card.style.background = isDark ? '#2d2d2d' : 'white';
-                    card.style.color = isDark ? '#fff' : '#333';
-                });
-            });
-            
-            document.body.appendChild(themeBtn);
-        }
-
-        addThemeToggle();
     </script>
     
     <script>

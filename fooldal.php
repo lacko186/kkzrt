@@ -19,6 +19,7 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
     <script src="betolt.js"></script>
     <title>Kaposbusz</title>
     <style>
@@ -29,7 +30,6 @@ if (!isset($_SESSION['user_id'])) {
         --accent-color: #7A7474;
         --text-light: #fbfbfb;
         --background-light: #f8f9fa;
-        --shadow-color: rgba(0, 0, 0, 0.5);
         --transition: all 0.3s ease;
     }
 
@@ -41,7 +41,8 @@ if (!isset($_SESSION['user_id'])) {
 
     body {
         font-family: 'Open Sans', sans-serif;
-        color: #222;
+        color: var(--text-light);
+        background: #e8e8e8;
     }
 
 /*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
@@ -50,7 +51,6 @@ if (!isset($_SESSION['user_id'])) {
         background: var(--primary-color);
         color: var(--text-light);
         padding: 1rem;
-        box-shadow: 0 2px 10px var(--shadow-color);
     }
 
     .header h1 {
@@ -289,8 +289,6 @@ if (!isset($_SESSION['user_id'])) {
         border-radius: 10px;
         margin-top: 20px;
         box-shadow: var(--shadow);
-        background: var(--primary-color);
-        color: var(--text-light);
         padding: 3rem 2rem;
         margin-top: 4rem;
     }
@@ -305,7 +303,7 @@ if (!isset($_SESSION['user_id'])) {
 
     .footer-section h2 {
         margin-bottom: 1rem;
-        color: var(--accent-color);
+        color: var(--text-light);
     }
 
     .footer-links {

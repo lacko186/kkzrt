@@ -45,7 +45,7 @@ catch(PDOException $e) {
         body {
             text-align: justify;
             font-family: 'Segoe UI',tahoma,Geneva, Verdana, sans-seriff;
-            background: linear-gradient(to right, black, darkred, gray);
+            background: #e8e8e8;
             color: #000;
             min-height: 100vh;
             
@@ -274,7 +274,7 @@ catch(PDOException $e) {
 
         /* Common card styles */
         .card {
-            background: #e6e3e3;
+            background: #fcfcfc;
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);

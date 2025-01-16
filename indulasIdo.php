@@ -20,25 +20,23 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaposvár Helyi Járatok</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="betolt.js"></script>
 
     <style>
         :root {
             --primary-color:linear-gradient(to right, #211717,#b30000);
-            --accent-color: #FFC107;
+            --accent-color: #7A7474;
             --text-light: #fbfbfb;
-            --shadow: 0 2px 4px rgba(0,0,0,0.1);
             --secondary-color: #3498db;
             --hover-color: #2980b9;
             --background-light: #f8f9fa;
-            --shadow-color: rgba(0, 0, 0, 0.1);
+            --shadow: rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #F5F5F5;
+            background: #e8e8e8;
             color: #333;
             margin: 0;
             padding: 0;
@@ -92,22 +90,29 @@ try {
 
 /*--------------------------------------------------------------------------------------------------------CSS - BODY CONTENT----------------------------------------------------------------------------------------------*/
         .route-container {
-            display: inline;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: grid;
             padding: 2rem;
             max-width: 1000px;
             margin: 0 auto;
         }
 
+        .routeNumCon{
+            background-color: #fcfcfc;
+        }
+
+        .routeNameCon{
+            background-color: #fcfcfc;
+        }
+
         .route-card {
-            background: #fbfbfb;
-            width: 1200px;
+            background: #fcfcfc;
+            width: 950px;
             border-radius: 20px;
             box-shadow: var(--shadow);
             padding: 1.5rem;
             transition: var(--transition);
             animation: fadeIn 0.5s ease-out;
-            margin: 0 auto;
+            margin-bottom: 10px;
             font-size: 1.5rem;
             color: #636363;
         }
@@ -171,51 +176,52 @@ try {
 /*--------------------------------------------------------------------------------------------------------BODY CONTENT END------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------CSS - FOOTER---------------------------------------------------------------------------------------------------*/
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: var(--shadow);
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            margin-top: 4rem;
-        }
+    footer {
+        text-align: center;
+        padding: 10px;
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: var(--shadow);
+        background: var(--primary-color);
+        color: var(--text-light);
+        padding: 3rem 2rem;
+        margin-top: 4rem;
+    }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
 
-        .footer-section h2 {
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
+    .footer-section h2 {
+        margin-bottom: 1rem;
+        color: var(--text-color);
+    }
 
-        .footer-links {
-            list-style: none;
-        }
+    .footer-links {
+        list-style: none;
+    }
 
-        .footer-links li {
-            margin-bottom: 0.5rem;
-        }
+    .footer-links li {
+        margin-bottom: 0.5rem;
+    }
 
-        .footer-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: var(--transition);
-        }
+    .footer-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        transition: var(--transition);
+    }
 
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
+    .footer-links a:hover {
+        color: var(--accent-color);
+    }
 /*--------------------------------------------------------------------------------------------------------FOOTER END-----------------------------------------------------------------------------------------------------*/
+
 
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
 
@@ -268,7 +274,56 @@ try {
             }
 
             .routeCon{
-                width: 345px;
+                width: 365px;
+            }
+
+            .switchBtn{
+                margin-right: 0;
+            }
+
+            .header h1{
+                margin-left: 2%;
+            }
+
+            #datePicker{
+                margin-left: 28%;
+            }
+
+            .backBtn{
+                width: 15%;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header-content {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .route-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .route-card{
+                width: 295px;
+            }
+
+            .route-number{
+                margin-left: 0;
+                padding-right: 60px;
+            }
+
+            .route-name{
+                font-size: 1.25rem;
+                margin-left: 0;
+            }
+
+            .routeCon{
+                width: 335px;
             }
 
             .switchBtn{
@@ -344,6 +399,13 @@ try {
     document.getElementById("datePicker").min = today.toISOString().split("T")[0];
 /*--------------------------------------------------------------------------------------------------------DATE PICKER END------------------------------------------------------------------------------------------------*/
 
+/*---------------------------------------------------------------------------------------------------------JAVASCRIPT - BACK BUTTON--------------------------------------------------------------------------------------*/
+    document.getElementById('backBtn').addEventListener('click', function() {
+            window.location.href = 'jaratok.php'; // Redirect to jaratok.php
+    });
+/*---------------------------------------------------------------------------------------------------------BACK BUTTON END-----------------------------------------------------------------------------------------------*/
+
+
 /*--------------------------------------------------------------------------------------------------------JAVASCRIPT - BUS ARRAY-----------------------------------------------------------------------------------------*/
         const busRoutesIdo = [
             {
@@ -381,8 +443,6 @@ try {
                 "nameBack": "Videoton - Raktár u.",
                 "start": ["05:20","07:00","17:40"],
                 "startBack": ["06:15","14:15","18:05"],
-                "startSat": [],
-                "startSatBack": ["06:15"],
                 "goesBack": true,
             },
             {
@@ -731,8 +791,34 @@ try {
 
         // Helper function to check if the selected date is a weekend
         function isWeekend(date) {
-            const day = date.getDay(); // 0 is Sunday, 6 is Saturday
-            return day === 0 || day === 6;
+            const day = date.getDay(); 
+            if (day === 6){
+                return "Saturday";
+            }
+            else if (day === 0){
+                return "Sunday";
+            }
+            else{
+                return null;
+            }
+        }
+
+        // Display route details
+        if (route) {
+            document.getElementById('routeNumCon').innerHTML = `
+                <div class="route-number">${routeNumber}</div>
+            `;
+            document.getElementById('routeNameCon').innerHTML = `
+                <div class="route-name" id="routeName">
+                    ${routeName}
+                    <span class="switchBtn">
+                        <button id="switchBtn" onclick="swicth()">
+                            <img src="switch.png" alt="Switch" style="width: 40px; height: 25px; max-width: 40px; max-width: 20px;">
+                        </button>
+                    </span>
+                </div>
+                
+            `;
         }
 
         // Function to render the start times for the route
@@ -753,6 +839,15 @@ try {
                             startCard.className = 'route-card';
                             startCard.innerHTML = `<div class="start-time-card">${time}</div>`;
                             routeContainer.appendChild(startCard);
+
+                            startCard.addEventListener('click', () => {
+                                const url = new URL('KKZRT/kkzrt/pontosIdoMenet.php', window.location.origin);
+                                url.searchParams.append('timeNumber', route.number);
+                                url.searchParams.append('timeName', route.name);
+                                url.searchParams.append('startTime', time); // Pass the selected time
+                                url.searchParams.append('dayGoes', isWeekend(selectedDate)); // "Saturday" or "Sunday"
+                                window.location.href = url.toString();
+                            });
                         });
                     }
                 } else if (dayGoes && dayGoes.toLowerCase().includes(selectedDay)) {
@@ -762,6 +857,15 @@ try {
                         startCard.className = 'route-card';
                         startCard.innerHTML = `<div class="start-time-card">${time}</div>`;
                         routeContainer.appendChild(startCard);
+
+                        startCard.addEventListener('click', () => {
+                            const url = new URL('KKZRT/kkzrt/pontosIdoMenet.php', window.location.origin);
+                            url.searchParams.append('timeNumber', route.number);
+                            url.searchParams.append('timeName', route.name);
+                            url.searchParams.append('startTime', time); // Pass the selected time
+                            url.searchParams.append('dayGoes', "weekday"); // Specify it's a weekday
+                            window.location.href = url.toString();
+                        });
                     });
                 }
             }
@@ -780,32 +884,8 @@ try {
             });
         }
 
-        // Display route details
-        if (route) {
-            document.getElementById('routeNumCon').innerHTML = `
-                <div class="route-number">${routeNumber}</div>
-            `;
-            document.getElementById('routeNameCon').innerHTML = `
-                <div class="route-name">
-                    ${routeName}
-                    <span class="switchBtn">
-                        <button id="switchBtn" onclick="swicth()">
-                            <img src="switch.png" alt="Switch" style="width: 40px; height: 25px; max-width: 40px; max-width: 20px;">
-                        </button>
-                    </span>
-                </div>
-                
-            `;
-        }
-
         // Global flag to toggle between showing forward/backward times
         let showBackTimes = false;
-
-        // Helper function to check if the selected date is a weekend
-        function isWeekend(date) {
-            const day = date.getDay(); // 0 is Sunday, 6 is Saturday
-            return day === 0 || day === 6;
-        }
 /*--------------------------------------------------------------------------------------------------------DISPLAY ROUTES END--------------------------------------------------------------------------------------------*/
 
 /*---------------------------------------------------------------------------------------------------------JAVASCRIPT - SWITCH FUNCTION----------------------------------------------------------------------------------*/
@@ -815,11 +895,6 @@ try {
             if (!route) {
                 console.error("Route not found!");
                 return;
-            }
-
-            // If the route can go back, toggle the name and nameBack
-            if (route.goesBack) {
-                [route.name, route.nameBack] = [route.nameBack, route.name];
             }
 
             // Toggle between showing forward or backward times
@@ -858,13 +933,28 @@ try {
             if (times.length === 0) {
                 console.warn("No times available for the selected day!");
             } else {
+                // If no times are available for the selected day, log a warning
+            if (times.length === 0) {
+                console.warn("No times available for the selected day!");
+            } else {
                 // Render the times as route cards
                 times.forEach(time => {
                     const startCard = document.createElement('div');
                     startCard.className = 'route-card';
                     startCard.innerHTML = `<div class="start-time-card">${time}</div>`;
                     routeContainer.appendChild(startCard);
+
+                    startCard.addEventListener('click', () => {
+                            const url = new URL('pontosIdoMenet.php', window.location.origin);
+                            url.searchParams.append('timeNumber', route.number);
+                            url.searchParams.append('timeName', route.name);
+                            url.searchParams.append('startTime', time); 
+                            url.searchParams.append('dayGoes', isWeekend(selectedDate)?isWeekend(selectedDate):"weekday"); 
+                            url.searchParams.append('showBack',showBackTimes);
+                            window.location.href = url.toString();
+                        });
                 });
+            }
             }
 
             // Disable the switch button if goesBack is false
@@ -876,12 +966,6 @@ try {
             }
         }
 /*---------------------------------------------------------------------------------------------------------SWITCH FUNCTION END-------------------------------------------------------------------------------------------*/
-
-/*---------------------------------------------------------------------------------------------------------JAVASCRIPT - BACK BUTTON--------------------------------------------------------------------------------------*/
-        document.getElementById('backBtn').addEventListener('click', function() {
-            window.location.href = 'jaratok.php'; // Redirect to jaratok.php
-        });
-/*---------------------------------------------------------------------------------------------------------BACK BUTTON END-----------------------------------------------------------------------------------------------*/
 
     </script>
 </body>

@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
         if ($user && $password === $user['password']) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            header("Location: index.php");
+            header("Location: fooldal.php");
             exit();
         } else {
             $_SESSION['error'] = "Helytelen email vagy jelszó!";

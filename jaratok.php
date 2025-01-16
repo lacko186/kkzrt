@@ -39,7 +39,7 @@ try {
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #F5F5F5;
+            background: #e8e8e8;
             color: #333;
             margin: 0;
             padding: 0;
@@ -268,22 +268,21 @@ try {
 
 /*--------------------------------------------------------------------------------------------------------CSS - BODY CONTENT----------------------------------------------------------------------------------------------*/
         .route-container {
-            display: inline;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: grid;
             padding: 2rem;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .route-card {
-            background: var(--text-light);
-            width: 1200px;
+            background: #fcfcfc;
+            width: 950px;
             border-radius: 20px;
             box-shadow: var(--shadow);
             padding: 1.5rem;
             transition: var(--transition);
             animation: fadeIn 0.5s ease-out;
-            margin: 0 auto;
+            margin-bottom: 10px;
         }
 
         .route-card:hover{
@@ -297,13 +296,14 @@ try {
             background: #b30000;
             display: inline-block;
             width: 3%;
-            height: 60%;
+            height: 100%;
             font-size: 1.5rem;
             font-weight: bold;
             border-radius: 5px;
             padding-left: 20px;
             padding-right: 15px;
             color: var(--text-light);
+            padding-bottom: 2px;
         }
 
         .route-name{
@@ -409,16 +409,52 @@ try {
             }
 
             .route-number{
-                display: grid;
-                padding-right: 40px;
+                display: inline;
+                padding-right: 15px;
             }
 
             .route-name{
-                display: grid;
+                display: inline;
             }
 
             .route-card{
-                width: 340px;
+                width: 330px;
+            }
+
+            .nav-wrapper{
+                left: 0.01rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header-content {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .route-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            #datePicker{
+                margin-left: 28%;
+            }
+
+            .route-number{
+                display: inline;
+                padding-right: 15px;
+            }
+
+            .route-name{
+                display: inline;
+            }
+
+            .route-card{
+                width: 295px;
             }
 
             .nav-wrapper{
@@ -445,9 +481,15 @@ try {
                 <nav class="dropdown-menu" id="dropdownMenu">
                     <ul class="menu-items">
                         <li>
-                            <a href="index.php" class="active">
-                                <img src="placeholder.png" alt="Főoldal">
+                            <a href="fooldal.php" class="active">
+                                <img src="home.png" alt="Főoldal">
                                 <span>Főoldal</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.php" class="active">
+                                <img src="placeholder.png" alt="Térkép">
+                                <span>Térkép</span>
                             </a>
                         </li>
                         <li>
@@ -784,7 +826,7 @@ try {
                 `;
                 routeCard.addEventListener('click', () => {
                     // Redirect to indulasIdo.php with route details in the URL
-                    const url = new URL('indulasIdo.php', window.location.origin);
+                    const url = new URL('KKZRT/kkzrt/indulasIdo.php', window.location.origin);
                     url.searchParams.append('routeNumber', route.number);
                     url.searchParams.append('routeName', route.name);
                     url.searchParams.append('dayGoes', route.dayGoes);
