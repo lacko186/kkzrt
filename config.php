@@ -1,14 +1,18 @@
 <?php
-$host = 'localhost';
-$db = 'kkzrt';
-$user = 'root';
-$pass = '';
-$dsn = "mysql:host=$host;dbname=$db;charset=utf8";
+// Hibák megjelenítése
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 try {
-    $conn = new PDO($dsn, $user, $pass);
+    $host = 'localhost';
+    $dbname = 'kkzrt'; // Ellenőrizd, hogy ez egyezik-e az adatbázisod nevével!
+    $username = 'root';
+    $password = '';
+
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Adatbázis kapcsolódási hiba: " . $e->getMessage());
+
+} catch(PDOException $e) {
+    die("Kapcsolódási hiba: " . $e->getMessage());
 }
 ?>

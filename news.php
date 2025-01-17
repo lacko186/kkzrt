@@ -52,6 +52,7 @@ if (!$news) {
     body {
         font-family: 'Open Sans', sans-serif;
         color: #222;
+        background: #f5f5f5;
     }
 
 /*--------------------------------------------------------------------------------------------------------CSS - HEADER---------------------------------------------------------------------------------------------------*/
@@ -93,7 +94,7 @@ if (!$news) {
 
     #news-container{
         width:1200px;
-        height:400px;
+        height:450px;
         margin-left:20%;
         margin-top:2%
     }
@@ -123,7 +124,7 @@ if (!$news) {
 
     .footer-section h2 {
         margin-bottom: 1rem;
-        color: var(--accent-color);
+        color: var(--text-color);
     }
 
     .footer-links {
@@ -148,17 +149,13 @@ if (!$news) {
 
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
         @media (max-width: 480px) {
-            .header-content {
-                padding: 1rem;
-            }
-
             h1 {
                 font-size: 1.5rem;
             }
 
             .header h1{
                 margin-right: 1%;
-                margin-left: 1.5%;
+                margin-left: 3%;
                 font-size: 1.4rem;
             }
 
@@ -167,8 +164,8 @@ if (!$news) {
             }
 
             #news-container{
-                max-width:370px;
-                max-height:550px;
+                width:340px;
+                height:850px;
                 margin-left:10%;
                 margin-top:10%
             }
@@ -178,13 +175,20 @@ if (!$news) {
                 font-size: 1.15rem;
             }
             
+            footer{
+                width: 415px;
+            }
+
+            .header{
+                width: 415px;
+            }
+
+            body{
+                width: 415px;
+            }
         }
 
         @media (max-width: 380px) {
-            .header-content {
-                padding: 1rem;
-            }
-
             h1 {
                 font-size: 1.5rem;
             }
@@ -199,13 +203,25 @@ if (!$news) {
 
             #news-container{
                 max-width:335px;
-                max-height:400px;
-                margin-left:10%;
+                max-height:850px;
+                margin-left:5%;
                 margin-top:10%
             }
 
             #details{
-                width: 310px;
+                width: 375px;
+            }
+
+            footer{
+                width: 375px;
+            }
+
+            .header{
+                width: 375px;
+            }
+
+            body{
+                width: 375px;
             }
         }
 /*--------------------------------------------------------------------------------------------------------@MEDIA END-----------------------------------------------------------------------------------------------------*/
@@ -221,7 +237,7 @@ if (!$news) {
 <!-- -----------------------------------------------------------------------------------------------------HEADER END--------------------------------------------------------------------------------------------------- -->
 
 <!-- -----------------------------------------------------------------------------------------------------HTML - NEWS CONTAINER---------------------------------------------------------------------------------------- -->
-    <div class="container">
+    <div id="news-container">
         <h1 style="padding-bottom:20px;"><?php echo htmlspecialchars($news['title']); ?></h1>
         <p style="background: #b30000;width: 90px;border-radius: 3px;padding:3px;color: #fbfbfb;margin-bottom:20px;"><?php echo htmlspecialchars($news['date']); ?></p>
         <p style="margin-bottom:20px;"><?php echo nl2br(htmlspecialchars($news['details'])); ?></p>
@@ -263,54 +279,6 @@ if (!$news) {
         window.location.href = 'fooldal.php'; 
     });
 /*---------------------------------------------------------------------------------------------------------BACK BUTTON END-----------------------------------------------------------------------------------------------*/
-/*
-        const news = [
-            {
-                "img": "/bus.png",
-                "title": "Adócsalás",
-                "date": "2024.11.23.",
-                "details": "Az XY xxx millió Ft-ot csaltak el ezen hétfői napon. Bűneik miatt a következő kedden fognak bíróságra menni."
-            },
-            {
-                "img": "/bus.png",
-                "title": "Családi baleset",
-                "date": "2024.10.31.",
-                "details": "XY család akart el utazni, de balesetbe kerültek. A család 2024. 11. 20-án szálltak fel a KK Zrt. buszára ami nem sokkal később a körforgalomnál felborult. Több felszálló utas megsérült, de szerencsére senki nem halt meg."
-            },
-            {
-                "img": "/bus.png",
-                "title": "Menetrend változás",
-                "date": "2024.08.11.",
-                "details": "Az előző menetrendre sok vevő panaszkodott, így változott a menetrend. A következő hétfőtől a 24-es, 25-ös, 36-os, 37-es mentrendje megváltozik kérjük figyeljenek oda a változásokra."
-            },
-            {
-                "img": "/bus.png",
-                "title": "Menetrend ",
-                "date": "2024.01.23.",
-                "details": "Az előző menetrendre sok vevő panaszkodott"
-            },
-        ];
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const img = urlParams.get('imgPath');
-        const title = urlParams.get('title');
-        const date = urlParams.get('date');
-        const details = urlParams.get('details');
-
-        const newContainer = document.getElementById('news-container');
-        newContainer.innerHTML = '';
-
-        // Populate the container with the URL parameter values
-        newContainer.innerHTML = `
-            <h1 id="title" style="padding-bottom:20px;">${title}</h1>
-            <p id="date" style="background: #b30000;width: 90px;border-radius: 3px;padding:3px;color: #fbfbfb;margin-bottom:10px;">${date}</p>
-            <p id="details" style="margin-bottom:20px;">${details}</p>
-            <img id="img" src="${img}" alt="${title}" style="width: 150px; height: 150px;" />
-        `;
-
-        // Append the container to the body or another element in your HTML
-        document.div.appendChild(newContainer);
-*/
     </script>
   </body>
 </html>

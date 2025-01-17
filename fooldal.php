@@ -1,14 +1,20 @@
 <?php
-// Adatbázis kapcsolat
+session_start();
 require_once 'config.php';
 
-$sql = "SELECT * FROM hirek";
-try {
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+// Debug információ
+error_log("Session tartalma: " . print_r($_SESSION, true));
+
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if (!isset($_SESSION['user_id'])) {
+    error_log("Nincs bejelentkezve, átirányítás a login.php-ra");
+    header("Location: login.php");
+    exit();
 }
+
+$sql = "SELECT id, title, details, date FROM hirek ORDER BY date DESC";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
 
 ?>
 <!DOCTYPE html>
@@ -129,13 +135,19 @@ try {
 
 /*UIverse card */
     .card-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
         max-width: 1200px; 
         margin-left: 17%;
     }
 
     .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         width: 290px;
-        height: 375px;
+        height: 400px;
         border-radius: 20px;
         background: #fcfcfc;
         position: relative;
@@ -144,7 +156,6 @@ try {
         transition: 0.5s ease-out;
         overflow: visible;
         margin-left: 8%;
-        display: inline-block;
         margin-bottom: 5%;
     }
 
@@ -191,6 +202,14 @@ try {
     .card:hover .card-button {
         transform: translate(-50%, 50%);
         opacity: 1;
+    }
+
+    .card-container .card {
+        display: none; /* Alapértelmezetten rejtett */
+    }
+
+    .card-container .card:nth-child(-n+6) {
+        display: inline-block; /* Az első 6 kártyát mutassa */
     }
 
     .news-date{
@@ -415,8 +434,8 @@ try {
                 echo '<div class="card">';
                 echo '<div class="card-details">';             
                 echo '<h2 class="text-title">' . htmlspecialchars($row["title"]) . '</h2>';
-                echo '<p class="card-details">' . htmlspecialchars(substr($row["details"], 0, 100)) . '...</p>';
                 echo '<p class="news-date">' . htmlspecialchars($row["date"]) . '</p>';
+                echo '<p class="card-details">' . htmlspecialchars(substr($row["details"], 0, 60)) . '...</p>';
                 echo '</div>';
                 echo '<a href="news.php?id=' . $row["id"] . '" class="card-button" style="text-align:center;">Részletek</a>';
                 echo '</div>';
@@ -426,11 +445,10 @@ try {
         }
         ?>
     </div>
-
 <!-- -----------------------------------------------------------------------------------------------------NEWS END----------------------------------------------------------------------------------------------------- -->
 
 <!-- -----------------------------------------------------------------------------------------------------HTML - MORE NEWS BUTTON-------------------------------------------------------------------------------------- -->
-    <button class="btn-53" id="btnMoreNews">
+    <button class="btn-53" id="btnMoreNews" data-expanded="false">
         Még több hír >> 
     </button>
 <!-- -----------------------------------------------------------------------------------------------------MORE NEWS BUTTON END----------------------------------------------------------------------------------------- -->
@@ -493,119 +511,28 @@ try {
             });
         });
 /*--------------------------------------------------------------------------------------------------------DROPDOWNMENU END-----------------------------------------------------------------------------------------------*/
-/*
-        const newsData = [
-            {
-                "img": "bus.png",
-                "title": "Év végi közlekedési rend",
-                "date": "2024.11.23.",
-                "details": "a"
-            },
-            {
-                "img": "bus.png",
-                "title": "Családi baleset",
-                "date": "2024.10.31.",
-                "details": "XY család akart el utazni, de balesetbe kerültek. A család 2024. 11. 20-án szálltak fel a KK Zrt. buszára ami nem sokkal később a körforgalomnál felborult. Több felszálló utas megsérült, de szerencsére senki nem halt meg."
-            },
-            {
-                "img": "bus.png",
-                "title": "Menetrend változás",
-                "date": "2024.08.11.",
-                "details": "Az előző menetrendre sok vevő panaszkodott, így változott a menetrend. A következő hétfőtől a 24-es, 25-ös, 36-os, 37-es mentrendje megváltozik kérjük figyeljenek oda a változásokra."
-            },
-            {
-                "img": "bus.png",
-                "title": "Adócsalás",
-                "date": "2024.07.03.",
-                "details": "Az XY xxx millió Ft-ot csaltak el ezen hétfői napon. Bűneik miatt a következő kedden fognak bíróságra menni."
-            },
-            {
-                "img": "bus.png",
-                "title": "Családi baleset",
-                "date": "2024.05.28.",
-                "details": "XY család akart el utazni, de balesetbe kerültek. A család 2024. 11. 20-án szálltak fel a KK Zrt. buszára ami nem sokkal később a körforgalomnál felborult. Több felszálló utas megsérült, de szerencsére senki nem halt meg."
-            },
-            {
-                "img": "bus.png",
-                "title": "Menetrend változás",
-                "date": "2024.03.16.",
-                "details": "Az előző menetrendre sok vevő panaszkodott, így változott a menetrend. A következő hétfőtől a 24-es, 25-ös, 36-os, 37-es mentrendje megváltozik kérjük figyeljenek oda a változásokra."
-            },
-            {
-                "img": "bus.png",
-                "title": "Adócsalás",
-                "date": "2024.11.23.",
-                "details": "Az XY xxx millió Ft-ot csaltak el ezen hétfői napon. Bűneik miatt a következő kedden fognak bíróságra menni."
-            },
-            {
-                "img": "bus.png",
-                "title": "Családi baleset",
-                "date": "2024.10.31.",
-                "details": "XY család akart el utazni, de balesetbe kerültek. A család 2024. 11. 20-án szálltak fel a KK Zrt. buszára ami nem sokkal később a körforgalomnál felborult. Több felszálló utas megsérült, de szerencsére senki nem halt meg."
-            },
-        ];
+    
+    document.getElementById('btnMoreNews').addEventListener('click', function() {
+        const cards = document.querySelectorAll('.card-container .card');
+        const isExpanded = this.getAttribute('data-expanded') === 'true'; // Ellenőrzi a jelenlegi állapotot
 
-        function truncateText(text, maxLength) {
-            if (text.length > maxLength) {
-                return text.substring(0, maxLength) + '...';
-            }
-            return text;
-        }
-
-        let showAll = false; // Flag to track whether to show all news
-
-        function displayNews() {
-            const container = document.getElementById('card-container');
-            container.innerHTML = '';
-
-            const visibleNews = showAll ? newsData : newsData.slice(0, 6); // Display all or only the first 6
-
-            visibleNews.forEach(news => {
-                const newsElement = document.createElement('div');
-                newsElement.classList.add('card');
-
-                const truncatedDetails = truncateText(news.details, 50);
-
-                newsElement.innerHTML = `
-                    <div class="card-details">
-                        <p>
-                            <img src="${news.img}" style="width: 210px; height: 190px; padding-left: 0.7rem">
-                        </p>
-                        <p class="text-title" style="font-size:1.3rem;">${news.title}</p>
-                        <p class="date" style="background: #b30000;width: 90px;border-radius: 3px;padding:3px;color: #fbfbfb;">${news.date}</p>
-                        <p class="text-body">${truncatedDetails}</p>
-                    </div>
-                    <button class="card-button">More info</button>
-                `;
-
-                newsElement.addEventListener('click', () => {
-                    const url = new URL('news.php', window.location.origin);
-                    url.searchParams.append('imgPath', news.img);
-                    url.searchParams.append('title', news.title);
-                    url.searchParams.append('date', news.date);
-                    url.searchParams.append('details', news.details);
-                    window.location.href = url.toString();
-                });
-
-                container.appendChild(newsElement);
+        if (isExpanded) {
+            // Állapot visszaállítása: csak 6 kártya
+            cards.forEach((card, index) => {
+                card.style.display = index < 6 ? 'inline-block' : 'none';
             });
-        }
-
-        function setupButton() {
-            const button = document.getElementById('btnMoreNews');
-            button.textContent = showAll ? 'Kevesebb hír' : 'Még több hír';
-
-            button.addEventListener('click', () => {
-                showAll = !showAll; // Toggle the state
-                displayNews(); // Re-render news
-                button.textContent = showAll ? 'Kevesebb hír' : 'Még több hír'; // Update button text
+            this.textContent = 'Még több hír >>'; // Visszaállítja a szöveget
+            this.setAttribute('data-expanded', 'false'); // Állapot frissítése
+        } else {
+            // Minden kártya megjelenítése
+            cards.forEach(card => {
+                card.style.display = 'inline-block';
             });
+            this.textContent = 'Kevesebb hír <<'; // Szöveg frissítése
+            this.setAttribute('data-expanded', 'true'); // Állapot frissítése
         }
-
-        // Initial setup
-        displayNews();
-        setupButton();
-*/
+    });
     </script>
+
   </body>
 </html>
