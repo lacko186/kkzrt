@@ -432,10 +432,10 @@ $stmt->execute();
         if ($stmt->rowCount() > 0) {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo '<div class="card">';
-                echo '<div class="card-details">';             
+                echo '<div class="card-details">';         
                 echo '<h2 class="text-title">' . htmlspecialchars($row["title"]) . '</h2>';
                 echo '<p class="news-date">' . htmlspecialchars($row["date"]) . '</p>';
-                echo '<p class="card-details">' . htmlspecialchars(substr($row["details"], 0, 60)) . '...</p>';
+                echo '<p class="card-details">' . htmlspecialchars(substr($row["details"], 0, 50)) . '...</p>';
                 echo '</div>';
                 echo '<a href="news.php?id=' . $row["id"] . '" class="card-button" style="text-align:center;">Részletek</a>';
                 echo '</div>';
