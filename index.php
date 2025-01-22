@@ -381,7 +381,7 @@ if (!isset($_SESSION['user_id'])) {
             <option value="90 vissza">90 vissza - Rómahegy - Helyi autóbusz-állomás</option>
             <option value="91">91 - Rómahegy - Pázmány P u. - Füredi u. csp</option>
             <option value="91 vissza">91 vissza - Rómahegy - Pázmány P u. - Füredi u. csp</option>
-                    </select>
+        </select>
     </div>
 
     <!-- Advanced Route Search Button -->
