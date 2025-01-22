@@ -356,7 +356,6 @@ if (!isset($_SESSION['user_id'])) {
             <option value="73">73 - Kaposfüred forduló - KOMÉTA - Kaposszentjakab forduló</option>
             <option value="73 vissza">73 vissza - Kaposszentjakab forduló - KOMÉTA - Kaposfüred forduló</option>
             <option value="74">74 - Hold utca - Helyi autóbusz-állomás</option>
-            <option value="74 vissza">74 vissza - Helyi autóbusz-állomás - Hold utca</option>
             <option value="75">75 - Helyi autóbusz-állomás - Kaposszentjakab</option>
             <option value="75 vissza">75 vissza - Kaposszentjakab - Helyi autóbusz-állomás</option>
             <option value="81">81 - Helyi autóbusz-állomás - Hősök temploma - Toponár forduló</option>
@@ -368,7 +367,6 @@ if (!isset($_SESSION['user_id'])) {
             <option value="84">84 - Helyi autóbusz-állomás - Toponár, forduló - Répáspuszta</option>
             <option value="84 vissza">84 vissza - Répáspuszta - Toponár, forduló - Helyi autóbusz-állomás</option>
             <option value="85">85 - Helyi autóbusz-állomás - Kisgát- Helyi autóbusz-állomás</option>
-            <option value="85 vissza">85 vissza - Helyi autóbusz-állomás - Kisgát- Helyi autóbusz-állomás</option>
             <option value="86">86 - Helyi autóbusz-állomás - METYX - Szennyvíztelep</option>
             <option value="86 vissza">86 vissza - Szennyvíztelep - METYX - Helyi autóbusz-állomás</option>
             <option value="87">87 - Helyi autóbusz állomás - Videoton - METYX</option>
@@ -379,7 +377,7 @@ if (!isset($_SESSION['user_id'])) {
             <option value="89 vissza">89 vissza - Kaposvári Egyetem - Helyi autóbusz-állomás</option>
             <option value="90">90 - Helyi autóbusz-állomás - Rómahegy</option>
             <option value="90 vissza">90 vissza - Rómahegy - Helyi autóbusz-állomás</option>
-            <option value="91">91 - Rómahegy - Pázmány P u. - Füredi u. csp</option>
+            <option value="91">91 - Füredi u. csp - Pázmány P. u. - Rómahegy</option>
             <option value="91 vissza">91 vissza - Rómahegy - Pázmány P u. - Füredi u. csp</option>
         </select>
     </div>
