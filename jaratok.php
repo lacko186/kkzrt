@@ -20,16 +20,14 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaposvár Helyi Járatok</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="header.css">
     <script src="betolt.js"></script>
-    <!--<script src="busRoutesforJaratok.js"></script>-->
 
     <style>
         :root {
             --primary-color:linear-gradient(to right, #211717,#b30000);
-            --accent-color: #FFC107;
+            --accent-color: #7A7474;
             --text-light: #fbfbfb;
-            --shadow: 0 2px 4px rgba(0,0,0,0.1);
             --secondary-color: #3498db;
             --hover-color: #2980b9;
             --background-light: #f8f9fa;
@@ -39,7 +37,7 @@ try {
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #e8e8e8;
+            background: #F5F5F5;
             color: #333;
             margin: 0;
             padding: 0;
@@ -74,189 +72,6 @@ try {
             position: relative;
         }
 
-        .menu-btn {
-            background: none;
-            border: none;
-            border-radius: 8px;
-            padding: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px var(--shadow-color);
-        }
-
-        .menu-btn:hover {
-            background: none;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px var(--shadow-color);
-        }
-
-        .hamburger {
-            position: relative;
-            width: 30px;
-            height: 20px;
-        }
-
-        .hamburger span {
-            position: absolute;
-            width: 100%;
-            height: 3px;
-            background: var(--text-light);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger span:nth-child(1) { top: 0; }
-        .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
-        .hamburger span:nth-child(3) { bottom: 0; }
-
-        .menu-btn.active .hamburger span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-btn.active .hamburger span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-btn.active .hamburger span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: calc(100% + 1rem);
-            left: 0;
-            background: var(--text-light);
-            border-radius: 12px;
-            min-width: 280px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-20px);
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 10px 30px var(--shadow-color);
-            overflow: hidden;
-        }
-
-        .dropdown-menu.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .menu-items {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .menu-items li {
-            transform: translateX(-100%);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-menu.active .menu-items li {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .menu-items li:nth-child(1) { transition-delay: 0.1s; }
-        .menu-items li:nth-child(2) { transition-delay: 0.2s; }
-        .menu-items li:nth-child(3) { transition-delay: 0.3s; }
-        .menu-items li:nth-child(4) { transition-delay: 0.4s; }
-        .menu-items li:nth-child(5) { transition-delay: 0.5s; }
-
-        .menu-items a {
-            display: flex;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            color: black;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .menu-items a:hover {
-            background: linear-gradient(to right, #211717,#b30000);
-            color: white;
-            padding-left: 2rem;
-        }
-
-        .menu-items a::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: darkred;
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .menu-items a:hover::before {
-            transform: scaleY(1);
-        }
-
-        .menu-items a img {
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            transition: transform 0.3s ease;
-        }
-
-        .menu-items a:hover img {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        .menu-items a span {
-            font-size: 17px;
-        }
-
-
-        .menu-items a.active {
-            background: white;
-            color: black;
-            font-weight: 600;
-        }
-
-        .menu-items a.active::before {
-            transform: scaleY(1);
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-
-        .menu-items a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: gray;
-            left: 0;
-            top: 0;
-            transform: scale(0);
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.5s ease;
-        }
-
-        .menu-items a:active::after {
-            animation: ripple 0.6s ease-out;
-        } 
-
         #datePicker{
             margin-left: 45%;
             font-size: 1rem;
@@ -268,21 +83,22 @@ try {
 
 /*--------------------------------------------------------------------------------------------------------CSS - BODY CONTENT----------------------------------------------------------------------------------------------*/
         .route-container {
-            display: grid;
+            display: inline;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             padding: 2rem;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .route-card {
-            background: #fcfcfc;
-            width: 950px;
+            background: #fbfbfb;
+            width: 1200px;
             border-radius: 20px;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-color);
             padding: 1.5rem;
             transition: var(--transition);
             animation: fadeIn 0.5s ease-out;
-            margin-bottom: 10px;
+            margin: 0 auto;
         }
 
         .route-card:hover{
@@ -296,14 +112,13 @@ try {
             background: #b30000;
             display: inline-block;
             width: 3%;
-            height: 100%;
+            height: 60%;
             font-size: 1.5rem;
             font-weight: bold;
             border-radius: 5px;
             padding-left: 20px;
             padding-right: 15px;
             color: var(--text-light);
-            padding-bottom: 2px;
         }
 
         .route-name{
@@ -345,7 +160,7 @@ try {
 
         .footer-section h2 {
             margin-bottom: 1rem;
-            color: var(--text-light);
+            color: var(--accent-color);
         }
 
         .footer-links {
@@ -366,6 +181,7 @@ try {
             color: var(--accent-color);
         }
 /*--------------------------------------------------------------------------------------------------------FOOTER END-----------------------------------------------------------------------------------------------------*/
+
 
 /*--------------------------------------------------------------------------------------------------------CSS - @MEDIA---------------------------------------------------------------------------------------------------*/
 
@@ -404,57 +220,21 @@ try {
                 padding: 1rem;
             }
 
-            #datePicker{
-                margin-left: 28%;
+            .route-card{
+                width: 340px;
             }
 
             .route-number{
-                display: inline;
-                padding-right: 15px;
+                display: grid;
+                padding-right: 40px;
             }
 
             .route-name{
-                display: inline;
-            }
-
-            .route-card{
-                width: 330px;
-            }
-
-            .nav-wrapper{
-                left: 0.01rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .header-content {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 1.5rem;
-            }
-
-            .route-container {
-                grid-template-columns: 1fr;
-                padding: 1rem;
+                display: grid;
             }
 
             #datePicker{
                 margin-left: 28%;
-            }
-
-            .route-number{
-                display: inline;
-                padding-right: 15px;
-            }
-
-            .route-name{
-                display: inline;
-            }
-
-            .route-card{
-                width: 295px;
             }
 
             .nav-wrapper{
@@ -602,201 +382,9 @@ try {
     document.getElementById("datePicker").min = today.toISOString().split("T")[0];
 /*--------------------------------------------------------------------------------------------------------DATE PICKER END------------------------------------------------------------------------------------------------*/
 
-        const busRoutes = [
-                    {
-                        "number": "12",
-                        "name": "Helyi autóbusz-állomás - Sopron u. - Laktanya",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "13",
-                        "name": "Helyi autóbusz-állomás - Kecelhegy - Helyi autóbusz-állomás",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "20",
-                        "name": "Raktár u. - Laktanya - Videoton",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "21",
-                        "name": "Raktár u. - Videoton",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "23",
-                        "name": "Kaposfüred forduló - Füredi csp. - Kaposvári Egyetem",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "26",
-                        "name": "Kaposfüred forduló - Losonc köz - Videoton - METYX",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "27",
-                        "name": "Laktanya - Füredi u. csp. - KOMÉTA",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "31",
-                        "name": "Helyi autóbusz-állomás - Egyenesi u. forduló",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "32",
-                        "name": "Helyi autóbuszállomás - Kecelhegy - Helyi autóbusz-állomás",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "33",
-                        "name": "Helyi aut. áll. - Egyenesi u. - Kecelhegy - Helyi aut. áll.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "40",
-                        "name": "Koppány vezér u - 67-es út - Raktár u.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "41",
-                        "name": "Koppány vezér u - Bartók B. u. - Raktár u.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "42",
-                        "name": "Töröcske forduló - Kórház - Laktanya",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "43",
-                        "name": "Helyi aut.-áll. - Kórház- Laktanya - Raktár utca - Helyi aut.-áll.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "44",
-                        "name": "Helyi aut.-áll. - Raktár utca - Laktanya -Arany J. tér - Helyi aut.-áll.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "45",
-                        "name": "Helyi autóbusz-állomás - 67-es út - Koppány vezér u.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "46",
-                        "name": "Helyi autóbusz-állomás - Töröcske forduló",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "47",
-                        "name": "Koppány vezér u.- Kórház - Kaposfüred forduló",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "51",
-                        "name": "Laktanya - Sopron u. - Rómahegy",
-                        "dayGoes": ["Saturday","Sunday"],
-                    },
-                    {
-                        "number": "61",
-                        "name": "Helyi- autóbuszállomás - Béla király u.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "62",
-                        "name": "Helyi autóbusz-állomás - Városi fürdő - Béla király u.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "70",
-                        "name": "Helyi autóbusz-állomás - Kaposfüred",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "71",
-                        "name": "Kaposfüred forduló - Kaposszentjakab forduló",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "72",
-                        "name": "Kaposfüred forduló - Hold u. - Kaposszentjakab forduló",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "73",
-                        "name": "Kaposfüred forduló - KOMÉTA - Kaposszentjakab forduló",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "74",
-                        "name": "Hold utca - Helyi autóbusz-állomás",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "75",
-                        "name": "Helyi autóbusz-állomás - Kaposszentjakab",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "81",
-                        "name": "Helyi autóbusz-állomás - Hősök temploma - Toponár forduló",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "82",
-                        "name": "Helyi autóbusz-állomás - Kórház - Toponár Szabó P. u.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "83",
-                        "name": "Helyi autóbusz-állomás - Szabó P. u. - Toponár forduló",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "84",
-                        "name": "Helyi autóbusz-állomás - Toponár, forduló - Répáspuszta",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "85",
-                        "name": "Helyi autóbusz-állomás - Kisgát- Helyi autóbusz-állomás",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "86",
-                        "name": "Helyi autóbusz-állomás - METYX - Szennyvíztelep",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "87",
-                        "name": "Helyi autóbusz állomás - Videoton - METYX",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "88",
-                        "name": "Helyi autóbusz-állomás - Videoton",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-                    },
-                    {
-                        "number": "89",
-                        "name": "Helyi autóbusz-állomás - Kaposvári Egyetem",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "90",
-                        "name": "Helyi autóbusz-állomás - Rómahegy",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    },
-                    {
-                        "number": "91",
-                        "name": "Rómahegy - Pázmány P u. - Füredi u. csp.",
-                        "dayGoes": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-                    }
-
-                ];
-
 /*--------------------------------------------------------------------------------------------------------JAVASCRIPT - DISPLAY ROUTES------------------------------------------------------------------------------------*/
+        let busRoutes = []; // Declare globally to store fetched routes
+
         function displayRoutes(filter = "all", selectedDate = new Date()) {
             const routeContainer = document.getElementById('routeContainer');
             routeContainer.innerHTML = "";
@@ -826,7 +414,7 @@ try {
                 `;
                 routeCard.addEventListener('click', () => {
                     // Redirect to indulasIdo.php with route details in the URL
-                    const url = new URL('KKZRT/kkzrt/indulasIdo.php', window.location.origin);
+                    const url = new URL('indulasIdo.php', window.location.origin);
                     url.searchParams.append('routeNumber', route.number);
                     url.searchParams.append('routeName', route.name);
                     url.searchParams.append('dayGoes', route.dayGoes);
@@ -838,8 +426,21 @@ try {
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Initial display with today's date
-            displayRoutes();
+            // Fetch the JSON file and initialize the app
+            fetch('busRoutesForJaratok.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load bus routes data');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    busRoutes = data.busRoutes; // Store the fetched routes
+                    displayRoutes(); // Initial display with today's date
+                })
+                .catch(error => {
+                    console.error('Error fetching the JSON file:', error);
+                });
 
             // Handle changes in the date picker
             const datePicker = document.getElementById('datePicker');
