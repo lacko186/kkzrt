@@ -1382,23 +1382,50 @@ setInterval(updateBusRoutes, 60000);
 
             
 
-        // Search function
-        const searchBox = document.getElementById('searchBox');
-        searchBox.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const routeCards = document.querySelectorAll('.route-card');
-            
-            routeCards.forEach(card => {
-                const routeText = card.textContent.toLowerCase();
-                if (routeText.includes(searchTerm)) {
-                    card.style.display = 'block';
-                    card.style.animation = 'fadeIn 0.5s ease-out';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
+        /// Search function
+const searchBox = document.getElementById('searchBox');
+searchBox.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase().trim();
+    const routeCards = document.querySelectorAll('.route-card');
+    
+    routeCards.forEach(card => {
+        // Járatszám keresése
+        const routeNumber = card.querySelector('.route-number')?.textContent.trim() || '';
+        
+        // Útvonalnév keresése
+        const routeName = card.querySelector('.route-name')?.textContent.toLowerCase() || '';
+        
+        // Megállók keresése
+        const stops = card.querySelector('.stops')?.textContent.toLowerCase() || '';
+        
+        // Pontos járatszám egyezés elsőbbséget élvez
+        if (routeNumber === searchTerm) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.5s ease-out';
+            return;
+        }
+        
+        // Egyéb találatok keresése
+        if (routeNumber.includes(searchTerm) || 
+            routeName.includes(searchTerm) || 
+            stops.includes(searchTerm)) {
+            card.style.display = 'block';
+            card.style.animation = 'fadeIn 0.5s ease-out';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
 
+// CSS az animációhoz
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+`;
+document.head.appendChild(style);
 
         // Responsive mobile menu
 
